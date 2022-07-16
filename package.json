@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Api para estudos feita para consumir a pokeapi.co (api pública)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "client": "node src/client/pokeApiClient.js",
+    "app": "nodemon index.js",
     "curiosities-native-server": "nodemon curiosities/serverNative.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
