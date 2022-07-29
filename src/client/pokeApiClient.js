@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Pokemon from './pokemon.js';
 
 const urlBase = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -10,21 +9,28 @@ async function getPokemonByName(name) {
     try {
         let response = await axios.get(url);
 
-        let pokemon = new Pokemon(
-            response.data.id,
-            response.data.name,
-            response.data.species.name,
-            response.data.types.map(typeInfo => typeInfo.type.name).join(" | "),
-            response.data.sprites.front_default
-        );
+        // Pesquisar sobre descontrução no javascript
+        let pokemon = {
+            id: response.data.id,
+            name: response.data.name,
+            specie: response.data.species.name,
+            types: response.data.types.map(typeInfo => typeInfo.type.name).join(" | "),
+            image: response.data.sprites.front_default
+        }
 
-        console.log(pokemon);
-        return response.data;
+        // console.log(pokemon);
+        return pokemon;
 
     } catch (error) {
         throw new Error("ops! ocorreu um ao buscar o Pokemon!", error);
     };
 }
 
-let responseApi = getPokemonByName("bulbasaur");
-console.log(responseApi);
+export default { getPokemonByName };
+
+// async function run() {
+//     let responseApi = await getPokemonByName("bulbasaur");
+//     console.log(responseApi);
+// }
+
+// run()
